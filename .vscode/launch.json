@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-OauthApplication<oauth>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.couchcoding.oauth.oauth.OauthApplication",
+      "projectName": "oauth",
+      "args": ""
+    }
+  ]
+}
