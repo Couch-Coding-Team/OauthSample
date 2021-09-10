@@ -7,7 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.couchcoding.oauth.oauth.entity.CustomUser;
 import com.couchcoding.oauth.oauth.service.CustomUserDetailsService;
+import com.couchcoding.oauth.oauth.util.FirebaseUtil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
@@ -17,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -26,29 +27,33 @@ public class JwtFilter extends OncePerRequestFilter{
     @Autowired
     private CustomUserDetailsService userDetailsService;
     @Autowired
-    private FirebaseAuth firebaseAuth;
+    private FirebaseUtil firebaseUtil;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
         throws ServletException, IOException {
         
         String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            String token = authorizationHeader.substring(7);
-            try {
-                FirebaseToken decodedToken = firebaseAuth.verifyIdToken(token);
-                UserDetails user = userDetailsService.loadUserByUsername(decodedToken.getUid());
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        user, null, user.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                
-                filterChain.doFilter(request, response);
-            } catch (FirebaseAuthException e) {
-                response.sendError(HttpStatus.SC_UNAUTHORIZED, e.getMessage());
-            }
-        } else {
-            response.sendError(HttpStatus.SC_UNAUTHORIZED, "Invalid Authorization Header");
+        FirebaseToken decodedToken = null;
+
+        try{
+            decodedToken = firebaseUtil.verifyAuthorizationHeader(authorizationHeader);
+        } catch (IllegalArgumentException e) {
+            response.sendError(HttpStatus.SC_UNAUTHORIZED, e.getMessage());
+            return;
         }
+
+        UserDetails user = userDetailsService.loadUserByUsername(decodedToken.getUid());
+
+        if(user == null){
+            response.sendError(HttpStatus.SC_UNAUTHORIZED, "User not found");
+            return;
+        }
+        
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                user, null, user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        
+        filterChain.doFilter(request, response);
     }
 }
