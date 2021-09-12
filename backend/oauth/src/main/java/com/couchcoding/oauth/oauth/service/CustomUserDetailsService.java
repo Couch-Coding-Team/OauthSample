@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.couchcoding.oauth.oauth.controller.RegisterInfo;
 import com.couchcoding.oauth.oauth.dao.*;
 import com.couchcoding.oauth.oauth.entity.CustomUser;
 
@@ -20,11 +19,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userRepository.findById(username).get();
     }
 
-    public CustomUser register(String uid, RegisterInfo registerInfo) {
+    public CustomUser register(String uid, String email, String nickName) {
         CustomUser customUser = new CustomUser();
         customUser.setUsername(uid);
-        customUser.setEmail(registerInfo.getEmail());
-        customUser.setNickName(registerInfo.getNickName());
+        customUser.setNickname(nickName);
+        customUser.setEmail(email);
         userRepository.save(customUser);
         return customUser;
     }

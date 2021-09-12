@@ -19,7 +19,7 @@ public class CustomUser implements UserDetails {
     @Column
     private String email;
     @Column
-    private String nickName;
+    private String nickname;
 
 
     @Override
@@ -60,5 +60,9 @@ public class CustomUser implements UserDetails {
     public boolean isEnabled() {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    public UserInfo toUserInfo(){
+        return new UserInfo(username, email, nickname);
     }
 }

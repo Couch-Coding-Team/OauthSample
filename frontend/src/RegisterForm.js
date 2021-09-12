@@ -7,6 +7,7 @@ const RegisterForm =  ({ setRegisterFormOpen }) => {
   
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(`nickname :${event.target.nickname.value}`);
     const res =  await fetch("/users", {
       method: "POST",
       headers: defaultHeaders,
