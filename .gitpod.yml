@@ -6,5 +6,8 @@ ports:
     onOpen: open-preview
 
 vscode:
-  extentions:
+  extensions:
+    - vscjava.vscode-java-pack
+    - pivotal.vscode-boot-dev-pack
+    - jawandarajbir.react-vscode-extension-pack
     - xabikos.javascriptsnippets
