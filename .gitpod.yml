@@ -1,0 +1,6 @@
+vscode:
+  extentions:
+    - vscjava.vscode-java-pack
+    - pivotal.vscode-boot-dev-pack
+    - jawandarajbir.react-vscode-extension-pack
+    - xabikos.javascriptsnippets
