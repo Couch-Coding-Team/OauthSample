@@ -20,11 +20,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userRepository.findById(username).get();
     }
 
-    public void register(String uid, RegisterInfo registerInfo) {
+    public CustomUser register(String uid, RegisterInfo registerInfo) {
         CustomUser customUser = new CustomUser();
         customUser.setUsername(uid);
         customUser.setEmail(registerInfo.getEmail());
         customUser.setNickName(registerInfo.getNickName());
         userRepository.save(customUser);
+        return customUser;
     }
 }

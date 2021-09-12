@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/users")
+@Slf4j
 public class UserController {
     @Autowired
     private FirebaseUtil firebaseUtil;
@@ -23,14 +26,14 @@ public class UserController {
     private CustomUserDetailsService customUserDetailsService;
 
     @PostMapping("")
-    public ResponseEntity register(@RequestHeader("Authorization") String authorization, RegisterInfo registerInfo) {
+    public CustomUser register(@RequestHeader("Authorization") String authorization, RegisterInfo registerInfo) {
+        log.info("register request");
         FirebaseToken decodedToken = firebaseUtil.verifyAuthorizationHeader(authorization);
-        customUserDetailsService.register(decodedToken.getUid(), registerInfo);
-        return ResponseEntity.ok().build();
+        return customUserDetailsService.register(decodedToken.getUid(), registerInfo);
     }
 
-    @GetMapping("")
-    public CustomUser getUser(Authentication authentication) {
+    @GetMapping("/me")
+    public CustomUser getUserMe(Authentication authentication) {
         return (CustomUser) authentication.getPrincipal();
     }
 }
