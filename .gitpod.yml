@@ -1,3 +1,10 @@
+tasks: 
+  - init: ls -al
+
+ports:
+  - port: 3000
+    onOpen: open-preview
+
 vscode:
   extentions:
     - vscjava.vscode-java-pack
