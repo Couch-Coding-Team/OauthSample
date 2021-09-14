@@ -1,4 +1,4 @@
-package com.couchcoding.oauth.oauth.domain.user.repository;
+package com.couchcoding.oauth.oauth.domain.user.dao;
 
 import com.couchcoding.oauth.oauth.domain.user.entity.CustomUser;
 

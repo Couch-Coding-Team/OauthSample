@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.couchcoding.oauth.oauth.service.CustomUserDetailsService;
+import com.couchcoding.oauth.oauth.domain.user.service.CustomUserDetailsService;
 import com.couchcoding.oauth.oauth.util.FirebaseUtil;
 import com.google.firebase.auth.FirebaseToken;
 
@@ -35,7 +35,6 @@ public class JwtFilter extends OncePerRequestFilter{
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
         throws ServletException, IOException {
         
-        log.info("JwtFilter.doFilterInternal()");
         String authorizationHeader = request.getHeader("Authorization");
         FirebaseToken decodedToken = null;
 
@@ -44,8 +43,7 @@ public class JwtFilter extends OncePerRequestFilter{
         } catch (IllegalArgumentException e) {
             response.setStatus(HttpStatus.SC_UNAUTHORIZED);
             response.setContentType("application/json");
-            response.getWriter().write("{\"code\":\"INVALID_TOKEN\"}");
-            response.getWriter().write("{\"message\":\"" + e.getMessage() + "\"}");
+            response.getWriter().write("{\"code\":\"INVALID_TOKEN\", \"message\":\"" + e.getMessage() + "\"}");
             return;
         }
 

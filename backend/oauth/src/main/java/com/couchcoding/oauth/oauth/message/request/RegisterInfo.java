@@ -1,4 +1,4 @@
-package com.couchcoding.oauth.oauth.controller;
+package com.couchcoding.oauth.oauth.message.request;
 
 import lombok.Data;
 

@@ -2,8 +2,8 @@ package com.couchcoding.oauth.oauth.domain.user.controller;
 
 import com.couchcoding.oauth.oauth.domain.user.entity.CustomUser;
 import com.couchcoding.oauth.oauth.domain.user.service.CustomUserDetailsService;
-import com.couchcoding.oauth.oauth.message.RegisterInfo;
-import com.couchcoding.oauth.oauth.message.UserInfo;
+import com.couchcoding.oauth.oauth.message.request.RegisterInfo;
+import com.couchcoding.oauth.oauth.message.response.UserInfo;
 import com.couchcoding.oauth.oauth.util.FirebaseUtil;
 import com.google.firebase.auth.FirebaseToken;
 

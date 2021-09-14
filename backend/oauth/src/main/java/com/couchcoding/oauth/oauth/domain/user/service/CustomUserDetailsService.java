@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.couchcoding.oauth.oauth.domain.user.dao.*;
 import com.couchcoding.oauth.oauth.domain.user.entity.CustomUser;
-import com.couchcoding.oauth.oauth.domain.user.repository.*;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

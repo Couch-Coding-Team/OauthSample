@@ -1,4 +1,4 @@
-package com.couchcoding.oauth.oauth.message;
+package com.couchcoding.oauth.oauth.message.response;
 
 import com.couchcoding.oauth.oauth.domain.user.entity.CustomUser;
 
