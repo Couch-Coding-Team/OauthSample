@@ -1,7 +1,7 @@
 package com.couchcoding.oauth.oauth.domain.user.controller;
 
 import com.couchcoding.oauth.oauth.domain.user.entity.CustomUser;
-import com.couchcoding.oauth.oauth.domain.user.service.CustomUserDetailsService;
+import com.couchcoding.oauth.oauth.domain.user.service.CustomUserService;
 import com.couchcoding.oauth.oauth.message.request.RegisterInfo;
 import com.couchcoding.oauth.oauth.message.response.UserInfo;
 import com.couchcoding.oauth.oauth.util.FirebaseUtil;
@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     private FirebaseUtil firebaseUtil;
     @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private CustomUserService customUserDetailsService;
 
     @PostMapping("")
     public UserInfo register(@RequestHeader("Authorization") String authorization,

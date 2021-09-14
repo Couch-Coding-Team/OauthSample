@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.couchcoding.oauth.oauth.domain.user.service.CustomUserDetailsService;
+import com.couchcoding.oauth.oauth.domain.user.service.CustomUserService;
 import com.couchcoding.oauth.oauth.util.FirebaseUtil;
 import com.google.firebase.auth.FirebaseToken;
 
@@ -23,10 +23,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JwtFilter extends OncePerRequestFilter{
 
-    private CustomUserDetailsService userDetailsService;
+    private CustomUserService userDetailsService;
     private FirebaseUtil firebaseUtil;
 
-    public JwtFilter(CustomUserDetailsService userDetailsService, FirebaseUtil firebaseUtil) {
+    public JwtFilter(CustomUserService userDetailsService, FirebaseUtil firebaseUtil) {
         this.userDetailsService = userDetailsService;
         this.firebaseUtil = firebaseUtil;
     }
