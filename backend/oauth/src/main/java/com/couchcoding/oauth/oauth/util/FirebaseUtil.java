@@ -14,8 +14,6 @@ import com.google.firebase.auth.FirebaseToken;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import lombok.SneakyThrows;
-
 @Component
 public class FirebaseUtil {
     private FirebaseAuth firebaseAuth;
