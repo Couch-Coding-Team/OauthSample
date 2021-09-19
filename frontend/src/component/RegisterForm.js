@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "./AuthProvider";
-import { defaultHeaders } from "./utils";
+import { defaultHeaders } from "../config/clientConfig";
+import '../index.css';
 
 const RegisterForm =  ({ setRegisterFormOpen }) => {
   const { setUser } = useContext(UserContext);
@@ -23,13 +24,12 @@ const RegisterForm =  ({ setRegisterFormOpen }) => {
 
   return (
     <div>
-      <h1>Register</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" name="nickname" />
+        <label className='nickname'>
+             Enter your nickname
         </label>
-        <input type="submit" value="Register" />
+        <input className='nickname' type="text" name="nickname" />
+        <input className='signup' type="submit" value="Sign up" />
       </form>
     </div>
   );

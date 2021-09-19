@@ -1,0 +1,17 @@
+@startuml
+actor 유저 as u
+participant Client as c
+participant AuthorizationServer as a 
+participant ResourceServer as r
+
+u -> c: 로그인 요청
+c -> u: 권한 승인 요청
+u -> c: 권한 승인(로그인)
+c -> a: 인증 정보 전송
+a --> c: 인증 토큰 전송(JWT)
+c -> r: 유저 정보 요청 (JWT 토큰 포함)
+r -> a: 토큰 검증 요청
+a --> r: 토큰 검증 결과 전송
+r --> c: 유저 정보 전송
+c --> u: 로그인 완료 
+@enduml

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { auth } from "./firebaseAuth";
+import { auth } from "../auth/firebaseAuth";
 import RegisterForm from "./RegisterForm";
-import { defaultHeaders } from "./utils";
+import { defaultHeaders } from "../config/clientConfig";
 
 export const UserContext = React.createContext( null );
 export const AuthProvider = ({ children }) => {

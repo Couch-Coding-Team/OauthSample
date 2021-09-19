@@ -11,3 +11,71 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+button.signin{
+  position: absolute;
+  width: 319px;
+  height: 47px;
+  left: 48px;
+  top: 500px;
+  background-color: darkseagreen;
+}
+
+input.signup {
+  position: absolute;
+  width: 319px;
+  height: 47px;
+  left: 48px;
+  top: 263px;
+  background-color: darkseagreen;
+}
+
+div.main{
+  position: absolute;
+  width: 299px;
+  height: 184px;
+  left: 110px;
+  top: 300px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 42px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
+}
+
+input.nickname {
+  position: absolute;
+  width: 319px;
+  height: 51px;
+  left: 48px;
+  top: 196px;
+
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+}
+
+label.nickname {
+  position: absolute;
+  width: 211px;
+  height: 46px;
+  left: 30px;
+  top: 136px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
+}

@@ -2,10 +2,11 @@ package com.couchcoding.oauth.oauth.config;
 
 import com.couchcoding.oauth.oauth.domain.user.service.CustomUserService;
 import com.couchcoding.oauth.oauth.filter.JwtFilter;
-import com.couchcoding.oauth.oauth.util.FirebaseUtil;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,13 +24,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomUserService userDetailsService;
     
     @Autowired
-    private FirebaseUtil firebaseUtil;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .anyRequest().authenticated().and()
-                .addFilterBefore(new JwtFilter(userDetailsService, firebaseUtil),
+                .addFilterBefore(new JwtFilter(userDetailsService, firebaseAuth),
                      UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
@@ -37,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/users")
+        web.ignoring().antMatchers(HttpMethod.POST, "/users")
             .antMatchers("/")
             .antMatchers("/resources/**");
     }

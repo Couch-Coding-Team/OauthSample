@@ -1,0 +1,19 @@
+@startuml
+autonumber
+actor 유저 as u
+participant Client as c
+participant Firebase as f
+participant ResourceServer as r
+
+u -> c : 로그인 요청 
+c --> u : SNS 인증 화면 
+u -> c : 인증
+c -> f : 인증 정보 전송
+f --> c : 인증 토큰 전송
+c -> r : 사용자 정보 요청 (인증 토큰 포함)
+r -> f : 인증 토큰 검증
+f --> r : 검증 결과
+r --> c : 사용자 정보
+c --> u : 로그인 완료
+
+@enduml
