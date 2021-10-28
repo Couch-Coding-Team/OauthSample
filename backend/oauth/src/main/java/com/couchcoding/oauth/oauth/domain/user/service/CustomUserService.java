@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.couchcoding.oauth.oauth.domain.user.dao.*;
 import com.couchcoding.oauth.oauth.domain.user.entity.CustomUser;
@@ -19,11 +20,13 @@ public class CustomUserService implements UserDetailsService {
         return userRepository.findById(username).get();
     }
 
-    public CustomUser register(String uid, String email, String nickName) {
-        CustomUser customUser = new CustomUser();
-        customUser.setUsername(uid);
-        customUser.setNickname(nickName);
-        customUser.setEmail(email);
+    @Transactional
+    public CustomUser register(String uid, String email, String nickname) {
+        CustomUser customUser = CustomUser.builder()
+                .username(uid)
+                .email(email)
+                .nickname(nickname)
+                .build();
         userRepository.save(customUser);
         return customUser;
     }

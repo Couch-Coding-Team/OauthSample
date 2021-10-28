@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
@@ -20,6 +21,10 @@ public class CustomUser implements UserDetails {
     private String email;
     @Column
     private String nickname;
+
+    @Builder
+    public CustomUser(String username, String email, String nickname) {
+    }
 
 
     @Override
